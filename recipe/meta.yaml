@@ -19,9 +19,11 @@ build:
   skip: true  # [py2k]
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
+  build:
+    - {{ compiler('c') }}
   run:
     - python
     - multidict >=2.0
