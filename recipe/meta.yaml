@@ -1,19 +1,21 @@
 {% set name = "yarl" %}
-{% set version = "0.10.0" %}
-{% set sha256 = "d92947434946bf47e3ee2123f4ea785ea4c7d5ba37c93fd2142470868dc2a01b" %}
+{% set version = "0.13.0" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "25fe681a982f2cec567df8abac7cbd2ac27016e4aec89193945cab0643bfdb42" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  fn: {{ name }}-{{ version }}.{{ file_ext }}
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  {{ hash_type }}: {{ hash_value }}
 
 build:
   number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: python setup.py install --single-version-externally-managed --record=record.txt
   skip: true  # [py2k]
 
 requirements:
@@ -25,6 +27,8 @@ requirements:
     - multidict >=2.0
 
 test:
+  imports:
+    - yarl
   source_files:
     - tests
   requires:
