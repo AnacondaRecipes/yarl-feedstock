@@ -1,8 +1,8 @@
 {% set name = "yarl" %}
-{% set version = "0.14.2" %}
+{% set version = "1.1.1" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "e3cace21c8044457eb3a54506b99b267974c80280d3accfc7f22e70170f87ea8" %}
+{% set hash_value = "a69dd7e262cdb265ac7d5e929d55f2f3d07baaadd158c8f19caebf8dde08dfe8" %}
 
 package:
   name: {{ name|lower }}
@@ -26,7 +26,8 @@ requirements:
     - {{ compiler('c') }}
   run:
     - python
-    - multidict >=2.0
+    - multidict >=4.0
+    - idna >=2.0
 
 test:
   imports:
