@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   skip: true  # [py2k]
 
@@ -33,7 +33,9 @@ test:
   requires:
     - pytest
   commands:
-    - py.test tests
+    # `test_semicolon_as_separator` broken by changes to `parse_qsl` in recent
+    # Python releases; see <https://github.com/aio-libs/yarl/issues/563>
+    - py.test tests -k 'not test_semicolon_as_separator'
 
 about:
   home: https://github.com/aio-libs/yarl
