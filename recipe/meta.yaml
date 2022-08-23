@@ -34,9 +34,7 @@ test:
   requires:
     - pytest
   commands:
-    # `test_semicolon_as_separator` broken by changes to `parse_qsl` in recent
-    # Python releases; see <https://github.com/aio-libs/yarl/issues/563>
-    - py.test tests -k 'not test_semicolon_as_separator'
+    - py.test tests
 
 about:
   home: https://github.com/aio-libs/yarl
