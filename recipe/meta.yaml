@@ -14,7 +14,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
-  skip: true  # [py2k or py<=36]
+  skip: true  # [py<=36]
 
 requirements:
   build:
@@ -22,6 +22,8 @@ requirements:
   host:
     - python
     - pip
+    - setuptools >=4.0
+    - wheel
   run:
     - python
     - multidict >=4.0
@@ -38,12 +40,12 @@ test:
 
 about:
   home: https://github.com/aio-libs/yarl
-  license: Apache 2.0
+  license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
   license_url: https://www.apache.org/licenses/LICENSE-2.0
   summary: Yet another URL library
-  doc_url: http://yarl.readthedocs.io
+  doc_url: https://yarl.readthedocs.io
   dev_url: https://github.com/aio-libs/yarl
   doc_source_url: https://github.com/aio-libs/yarl/tree/master/docs
 
