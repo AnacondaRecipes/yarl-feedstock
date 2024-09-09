@@ -30,18 +30,15 @@ requirements:
     - python
     - multidict >=4.0
     - idna >=2.0
-    - typing-extensions >=3.7.4 # [py<38]
 
 test:
   imports:
     - yarl
   source_files:
-    - pytest.ini
     - tests
   requires:
     - pip
     - pytest
-    - pytest-cov
     - pytest-xdist
   commands:
     - pip check
