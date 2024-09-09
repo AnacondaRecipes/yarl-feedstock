@@ -1,6 +1,6 @@
 {% set name = "yarl" %}
-{% set version = "1.9.3" %}
-{% set sha256 = "4a14907b597ec55740f63e52d7fee0e9ee09d5b9d57a4f399a7423268e457b57" %}
+{% set version = "1.11.0" %}
+{% set sha256 = "f86f4f4a57a29ef08fa70c4667d04c5e3ba513500da95586208b285437cb9592" %}
 
 package:
   name: {{ name|lower }}
@@ -21,7 +21,7 @@ requirements:
   host:
     - python
     - expandvars
-    - setuptools >=47
+    - setuptools
     - wheel
     - tomli  # [py<311]
     - pip
@@ -36,13 +36,16 @@ test:
   imports:
     - yarl
   source_files:
+    - pytest.ini
     - tests
   requires:
     - pip
     - pytest
+    - pytest-cov
+    - pytest-xdist
   commands:
     - pip check
-    - py.test tests
+    - pytest -v tests
 
 about:
   home: https://github.com/aio-libs/yarl
