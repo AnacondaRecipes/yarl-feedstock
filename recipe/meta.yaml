@@ -53,6 +53,7 @@ about:
   license_family: Apache
   license_file: LICENSE
   summary: Yet another URL library
+  description: The module provides handy URL class for URL parsing and changing.
   doc_url: https://yarl.aio-libs.org
   dev_url: https://github.com/aio-libs/yarl
 
