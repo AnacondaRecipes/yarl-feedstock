@@ -1,6 +1,6 @@
 {% set name = "yarl" %}
-{% set version = "1.11.0" %}
-{% set sha256 = "f86f4f4a57a29ef08fa70c4667d04c5e3ba513500da95586208b285437cb9592" %}
+{% set version = "1.18.0" %}
+{% set sha256 = "20d95535e7d833889982bfe7cc321b7f63bf8879788fee982c76ae2b24cfb715" %}
 
 package:
   name: {{ name|lower }}
@@ -13,7 +13,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<=37]
+  skip: true  # [py<39]
 
 requirements:
   build:
@@ -21,7 +21,7 @@ requirements:
   host:
     - python
     - expandvars
-    - setuptools
+    - setuptools >=47
     - wheel
     - tomli  # [py<311]
     - pip
@@ -30,6 +30,7 @@ requirements:
     - python
     - multidict >=4.0
     - idna >=2.0
+    - propcache >=0.2.0
 
 test:
   imports:
@@ -40,9 +41,11 @@ test:
     - pip
     - pytest
     - pytest-xdist
+    - hypothesis
   commands:
     - pip check
-    - pytest -v tests
+    # missing pytest-codspeed for benchmark
+    - pytest -n auto -v tests --ignore=tests/test_quoting_benchmarks.py --ignore=tests/test_url_benchmarks.py
 
 about:
   home: https://github.com/aio-libs/yarl
