@@ -1,5 +1,5 @@
 {% set name = "yarl" %}
-{% set version = "1.18.0" %}
+{% set version = "1.22.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 20d95535e7d833889982bfe7cc321b7f63bf8879788fee982c76ae2b24cfb715
+  sha256: bebf8557577d4401ba8bd9ff33906f1376c877aa78d1fe216ad01b4d6745af71
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<39]
 
@@ -30,13 +30,14 @@ requirements:
     - python
     - multidict >=4.0
     - idna >=2.0
-    - propcache >=0.2.0
+    - propcache >=0.2.1
 
 test:
   imports:
     - yarl
   source_files:
     - tests
+    - pytest.ini
   requires:
     - pip
     - pytest
