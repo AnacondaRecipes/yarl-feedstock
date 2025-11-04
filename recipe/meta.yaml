@@ -41,12 +41,11 @@ test:
     - hypothesis
     - pip
     - pytest
-    - pytest-codspeed
     - pytest-xdist
   commands:
     - pip check
     # missing pytest-codspeed for benchmark
-    - pytest -n auto -v tests
+    - pytest -n auto -v tests  --ignore=tests/test_quoting_benchmarks.py --ignore=tests/test_url_benchmarks.py
 
 about:
   home: https://github.com/aio-libs/yarl
