@@ -37,16 +37,16 @@ test:
     - yarl
   source_files:
     - tests
-    - pytest.ini
   requires:
+    - hypothesis
     - pip
     - pytest
+    - pytest-codspeed
     - pytest-xdist
-    - hypothesis
   commands:
     - pip check
     # missing pytest-codspeed for benchmark
-    - pytest -n auto -v tests --ignore=tests/test_quoting_benchmarks.py --ignore=tests/test_url_benchmarks.py
+    - pytest -n auto -v tests
 
 about:
   home: https://github.com/aio-libs/yarl
