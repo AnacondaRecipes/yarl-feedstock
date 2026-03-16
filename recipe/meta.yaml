@@ -1,5 +1,5 @@
 {% set name = "yarl" %}
-{% set version = "1.22.0" %}
+{% set version = "1.23.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bebf8557577d4401ba8bd9ff33906f1376c877aa78d1fe216ad01b4d6745af71
+  sha256: 53b1ea6ca88ebd4420379c330aea57e258408dd0df9af0992e5de2078dc9f5d5
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 requirements:
   build:
@@ -25,11 +25,12 @@ requirements:
     - wheel
     - tomli  # [py<311]
     - pip
-    - cython 3.1
+    # In requirements ==3.2.3, but only 3.2.4 is available on main.
+    - cython >=3.2.3,<=3.2.4
   run:
     - python
-    - multidict >=4.0
     - idna >=2.0
+    - multidict >=4.0
     - propcache >=0.2.1
 
 test:
@@ -37,15 +38,15 @@ test:
     - yarl
   source_files:
     - tests
-  requires:
-    - hypothesis
-    - pip
-    - pytest
-    - pytest-xdist
   commands:
     - pip check
     # missing pytest-codspeed for benchmark
     - pytest -n auto -v tests  --ignore=tests/test_quoting_benchmarks.py --ignore=tests/test_url_benchmarks.py
+  requires:
+    - hypothesis
+    - pip
+    - pytest ==9.0.2
+    - pytest-xdist
 
 about:
   home: https://github.com/aio-libs/yarl
@@ -60,3 +61,5 @@ about:
 extra:
   recipe-maintainers:
     - sodre
+  skip-lints:
+    - host_section_needs_exact_pinnings
