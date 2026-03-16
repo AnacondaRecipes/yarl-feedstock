@@ -32,8 +32,6 @@ requirements:
     - idna >=2.0
     - multidict >=4.0
     - propcache >=0.2.1
-  run_constrained:
-    - towncrier ==25.8.0
 
 test:
   imports:
