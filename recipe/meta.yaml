@@ -1,5 +1,5 @@
 {% set name = "yarl" %}
-{% set version = "1.23.0" %}
+{% set version = "1.24.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 53b1ea6ca88ebd4420379c330aea57e258408dd0df9af0992e5de2078dc9f5d5
+  sha256: 9ac374123c6fd7abf64d1fec93962b0bd4ee2c19751755a762a72dd96c0378f8
 
 build:
   number: 0
@@ -21,12 +21,12 @@ requirements:
   host:
     - python
     - expandvars
-    - setuptools >=47
+    - setuptools >=82.0.1
     - wheel
     - tomli  # [py<311]
     - pip
-    # In requirements ==3.2.3, but only 3.2.4 is available on main.
-    - cython >=3.2.3,<=3.2.4
+    # See https://github.com/aio-libs/yarl/blob/v{{ version }}/requirements/cython.txt
+    - cython 3.2.4
   run:
     - python
     - idna >=2.0
@@ -40,12 +40,11 @@ test:
     - tests
   commands:
     - pip check
-    # missing pytest-codspeed for benchmark
-    - pytest -n auto -v tests  --ignore=tests/test_quoting_benchmarks.py --ignore=tests/test_url_benchmarks.py
+    - pytest -n auto -v tests
   requires:
     - hypothesis
     - pip
-    - pytest ==9.0.2
+    - pytest ==9.0.3
     - pytest-xdist
 
 about:
