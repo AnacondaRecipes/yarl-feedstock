@@ -21,7 +21,7 @@ requirements:
   host:
     - python
     - expandvars
-    - setuptools >=82.0.1
+    - setuptools >=47
     - wheel
     - tomli  # [py<311]
     - pip
