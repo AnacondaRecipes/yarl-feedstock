@@ -40,12 +40,16 @@ test:
     - tests
   commands:
     - pip check
-    - pytest -n auto -v tests
+    # py3.15 pytest-xdist 3.8 requires pytest<9, so it cannot be installed
+    # next to the upstream pytest 9.1.1 pin. Unpinned xdist then solves to
+    # 2.5 and pip check fails (pytest-forked requires py; no py3.15 build).
+    - pytest -n auto -v tests  # [py<315]
+    - pytest -v tests  # [py>=315]
   requires:
     - hypothesis
     - pip
     - pytest ==9.1.1
-    - pytest-xdist
+    - pytest-xdist  # [py<315]
 
 about:
   home: https://github.com/aio-libs/yarl
