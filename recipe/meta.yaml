@@ -1,5 +1,5 @@
 {% set name = "yarl" %}
-{% set version = "1.24.2" %}
+{% set version = "1.25.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 9ac374123c6fd7abf64d1fec93962b0bd4ee2c19751755a762a72dd96c0378f8
+  sha256: 03dd38de09bc213e9a8b29761eec33ee1d5318dac0e49d8af36e4d27830e23a7
 
 build:
   number: 0
@@ -21,12 +21,12 @@ requirements:
   host:
     - python
     - expandvars
-    - setuptools >=82.0.1
+    - setuptools >=47
     - wheel
     - tomli  # [py<311]
     - pip
     # See https://github.com/aio-libs/yarl/blob/v{{ version }}/requirements/cython.txt
-    - cython 3.2.4
+    - cython 3.3.0
   run:
     - python
     - idna >=2.0
@@ -40,12 +40,16 @@ test:
     - tests
   commands:
     - pip check
-    - pytest -n auto -v tests
+    # py3.15 pytest-xdist 3.8 requires pytest<9, so it cannot be installed
+    # next to the upstream pytest 9.1.1 pin. Unpinned xdist then solves to
+    # 2.5 and pip check fails (pytest-forked requires py; no py3.15 build).
+    - pytest -n auto -v tests  # [py<315]
+    - pytest -v tests  # [py>=315]
   requires:
     - hypothesis
     - pip
-    - pytest ==9.0.3
-    - pytest-xdist
+    - pytest ==9.1.1
+    - pytest-xdist  # [py<315]
 
 about:
   home: https://github.com/aio-libs/yarl

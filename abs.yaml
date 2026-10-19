@@ -1,0 +1,10 @@
+# Opt into the experimental Python 3.15 variant. Gated in the aggregate
+# conda_build_config.yaml on ANACONDA_ROCKET_ENABLE_PY315 only.
+build_env_vars:
+  ANACONDA_ROCKET_ENABLE_PY315: yes
+
+# py3.15 run deps are not on pkgs/main yet. Drop these once the rebuilds
+# are released: multidict-feedstock#14, propcache-feedstock#6.
+channels:
+  - https://staging.continuum.io/pbp/fs/multidict-feedstock/pr14/caa0572
+  - https://staging.continuum.io/pbp/fs/propcache-feedstock/pr6/2fca22d
